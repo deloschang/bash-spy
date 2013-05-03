@@ -3,18 +3,18 @@
 #
 # Description: Takes two birthdays (or two dates in history) as
 # arguments in form of MM/DD/YYYY. Then determines whether the two 
-# dates occurred on the same day of the week.
+# dates occurred on the same day of the week, notifying the user.
 #
 # Command line options:  None
 #
 # Input: two dates to test if they occurred on the same day of
-# the week
+# the week (in the format MM/DD/YYYY). Example: 04/06/1992
 #
 # Output: Tests if they occurred on the same day of the week
-# If so, the script will tell you.
+# If so, the script will tell you. If not, the script will also tell you.
 #
-# Special considerations: Enter your dates in MM/DD/YYYY format
-# 
+# Special considerations: Enter your dates in MM/DD/YYYY format. 
+# Input like 'yesterday' or 'tomorrow' won't work.
 #
 # Pseudocode: if there more or less than 2 arguments provided in the 
 # prompt, stop. Initialize the two arguments into variables. If 
@@ -34,33 +34,41 @@ first_date=$1
 second_date=$2
 
 # validate numbers format
-if echo $first_date | grep -cq '^[0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9]$' \
-  && echo $second_date | grep -cq '^[0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9]$'; then
+# this prevents dates like 'tomorrow' that work for date -d
+if echo $first_date | grep -cq '^[0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9]$'; then 
+  if echo $second_date | grep -cq '^[0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9]$'; then
 
-  # validate that they are dates
-  date -d "$first_date" > /dev/null 2>&1 && date -d "$second_date" > /dev/null 2>&1
+    # validate that they are dates
+    # this prevents dates like 45/55/1992, which are not valid.
+    date -d "$first_date" > /dev/null 2>&1 && date -d "$second_date" > /dev/null 2>&1
 
-  # dates are valid; parse for day of week
-  if [ $? -eq 0 ]; then
-    first_day_of_week=`date -d $first_date | cut -d" " -f1`
-    second_day_of_week=`date -d $second_date | cut -d" " -f1`
+    # dates are valid; find day of week by cutting
+    if [ $? -eq 0 ]; then
+      first_day_of_week=`date -d $first_date | cut -d" " -f1`
+      second_day_of_week=`date -d $second_date | cut -d" " -f1`
 
-    echo "The first person was born on: $first_day_of_week"
-    echo "The second person was born on: $second_day_of_week"
+      echo "The first person was born on: $first_day_of_week"
+      echo "The second person was born on: $second_day_of_week"
 
-    if [ "$first_day_of_week" == "$second_day_of_week" ]; then
-      echo "Jackpot: You were both born on the same day!"
+      # Check if the weekdays match. Tell user the result.
+      if [ "$first_day_of_week" == "$second_day_of_week" ]; then
+        echo "Jackpot: You were both born on the same day!"
+      else
+        echo "Therefore, you are not born on the same day."
+      fi
+
     else
-      echo "Therefore, you are not born on the same day."
+      echo "Date error: invalid dates. Example: 04/06/1992"
+      exit 1
     fi
-
   else
-    echo "Date error: invalid dates"
+    echo "Formatting error with $second_date: please enter in the format MM/DD/YYYY. Example: 04/06/1992"
     exit 1
+
   fi
 
 else
-	echo "Formatting error: please enter in the format MM/DD/YYYY"
+	echo "Formatting error with $first_date: please enter in the format MM/DD/YYYY. Example: 04/06/1992"
   exit 1
 fi
 

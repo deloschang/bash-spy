@@ -15,9 +15,10 @@
 # Special considerations: If a file has no '.' in its name or there
 # is a '.' that has no characters following it, it is considered to be
 # a 'noext' file. Current dir '.' and parent directory '..' are not counted.
+# Also, only files are counted.
 #
 # Pseudocode: First, search for files with the wildcard format '*.*'. Exclude
-# files with only a '.' and no characters following (handle it later). From
+# files with only a '.' and no characters following (handle it later as a noext). From
 # this list, reverse the letters and cut at the '.'. Extract the first slice 
 # for the file extension. Reverse letters again to restore the original 
 # filetype name. Sort and use unique to count the unique filetypes.
@@ -36,6 +37,6 @@ find . -type f -name '*.*' -not -name '*.' | rev \
 # include edge case with a . with no character following
 noext_count=`find . -type f ! -name "*.*" -o -name "*." -not -name "." | wc -l`
 
-# format similarly
+# format similarly with the above output
 echo -e "      $noext_count noext"
 exit 0

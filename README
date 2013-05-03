@@ -1,0 +1,43 @@
+Thanks for going through my code!
+
+Platform used: written on Mac OSX using ssh to login
+Scripts were tested and executed in the ssh (Linux)
+
+-
+
+Q1: If the dates are invalid, the program will exit
+
+-
+
+Q2: 
+
+-
+
+Q3: The program will stop running if there is no url.txt file
+(the first argument). The program will complain but continue
+if the URL in the file is invalid (will notify user)
+
+The .html files will be overwritten each run.
+
+Searches for substrings too and includes HTML tags
+
+- 
+
+Q4: Spy.sh will generate temp files for each user then concatenate 
+them into spy.log. 
+
+Time periods are calculated in minutes but changing awk can calculate them in 
+hours too (I went by the example output on the Lab page)
+
+To maintain accuracy of login times in case the
+script is killed, the variable "added${username}" increments total
+login time by 1 each loop if the user is already logged in. Then,
+when the user logs out, these increments are deducted and replaced by 
+the full login time. 
+
+Also, there are "dummy" variables for the bottom 3 lines (the trivia portion).
+
+
+
+
+

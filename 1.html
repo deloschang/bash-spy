@@ -295,15 +295,16 @@ addLoadEvent(menuListener());
 		
 <div class="pad5">
 <div style="font-size: 22px;"><span style="color: rgb(208, 49, 0);"><span style="font-family: times new roman,times,serif;">Featured Research</span></span></div><p>
-	<img alt="Exact optimal trajectories" src="http://www.cs.dartmouth.edu/content/features_research/omni.jpg" style="margin: 5px; float: left;" /></p>
+	<img alt="FG pipeline" src="http://www.cs.dartmouth.edu/content/features_research/cormen-pipelines.jpg" style="margin: 5px; float: left;" /></p>
 <p>
-	<a href="http://www.cs.dartmouth.edu/%7Erobotics">Prof. Devin Balkcom</a></p>
+	<a href="http://www.cs.dartmouth.edu/%7Ethc">Prof. Tom Cormen</a></p>
 <p>
-	Robot control algorithms, like computer algorithms, allocate resources to accomplish tasks; resources include time, energy, degrees of freedom, steps of computation, and precision. A fundamental problem is to determine the minimum resources required -- the physical complexity of of the task. The optimal trajectories provide insight into the capabilities of a mechanism, independent of compromises introduced by particular planning or control techniques.</p>
+	High-performance computing with disk-resident data? Although that might seem like an oxymoron, we are developing a software environment, <a href="http://www.cs.dartmouth.edu/FG/">FG</a>, to enable it.</p>
 <p>
-	The exact optimal trajectories were previously known for two vehicles: the Dubins car, and the Reeds-Shepp car. We have discovered the optimal trajectories for a third vehicle; the common differential-drive (wheelchair-like) robot, and work on two more vehicles is nearing completion.</p>
+	FG is for asynchronous programs that run on clusters and fit into a pipeline framework. Each pipeline stage corresponds to a function that operates on a buffer. Multiple buffers traverse the pipeline and correspond to blocks in the memory hiearchy. Stages run asynchronously (via threads) in order to make it easy to overlap their operations (computation, communication, and I/O).</p>
 <p>
-	<a href="http://www.cs.dartmouth.edu/%7Erobotics"> Read more...</a></p>
+	Using FG, we have developed programs that can sort well in excess of 100 gigbytes of data. (Image, left, shows Tom&#39;s whiteboard covered with deep thoughts about pipelines.)</p>
+
 </div>
 		
 			</div>
